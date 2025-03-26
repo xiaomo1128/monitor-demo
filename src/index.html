@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>前端监控SDK</title>
+  </head>
+  <body>
+    <div id="container">
+      <div class="content">
+        <input
+          id="successBtn"
+          type="button"
+          value="ajax请求成功"
+          onclick="sendSuccess()"
+        />
+        <input
+          id="errorBtn"
+          type="button"
+          value="ajax请求失败"
+          onclick="sendError()"
+        />
+
+        <!-- ------------------------------------------------ -->
+        <!-- <input
+          id="errorBtn"
+          type="button"
+          value="点击抛出错误"
+          onclick="throwError()"
+        />
+
+        <input
+          id="errorPromiseBtn"
+          type="button"
+          value="点击抛出Promise错误"
+          onclick="throwPromiseError()"
+        /> -->
+      </div>
+    </div>
+
+    <script>
+      function sendSuccess() {
+        let xhr = new XMLHttpRequest();
+        xhr.open("GET", "/success", true);
+        xhr.responseType = "json";
+        xhr.onload = () => {
+          console.log("sendSuccess", xhr.response);
+        };
+        xhr.send();
+      }
+      function sendError() {
+        let xhr = new XMLHttpRequest();
+        xhr.open("GET", "/error", true);
+        xhr.responseType = "json";
+        xhr.onload = () => {
+          console.log("load sendError", xhr.response);
+        };
+        xhr.onerror = (error) => {
+          console.log("onerror sendError", error);
+        };
+        xhr.send("name=trainxm");
+      }
+
+      // -----------------------------------------------
+      // function throwError() {
+      //   window.someVar.error = "error";
+      // }
+
+      // function throwPromiseError() {
+      //   new Promise((resolve, reject) => {
+      //     reject("Promise error");
+      //   }).then((res) => {
+      //     console.log(res);
+      //   });
+      // }
+    </script>
+    <script src="/someError.js"></script>
+  </body>
+</html>
