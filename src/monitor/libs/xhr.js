@@ -7,8 +7,8 @@ export function injectXHR() {
    */
   let oldOpen = XMLHttpRequest.prototype.open;
   XMLHttpRequest.prototype.open = function (method, url, async) {
-    // 陷入死循环  因为传给后端服务的log也监听了
-    if (!url.match(/logstores/)) {
+    // 陷入死循环  因为传给后端服务的log也监听了,排除 logstores sockjs 的监听
+    if (!url.match(/logstores/) && !url.match(/sockjs/)) {
       this.logData = { method, url, async };
     }
 
