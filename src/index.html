@@ -7,8 +7,16 @@
   </head>
   <body>
     <div id="container">
-      <div class="content">
-        xxx
+      <div
+        class="content"
+        style="
+          width: 600px;
+          height: 600px;
+          word-wrap: break-word;
+          background-color: gray;
+        "
+      >
+        <button id="clickBtn" onclick="clickMe()">点我</button>
 
         <!-- <input
           id="successBtn"
@@ -41,27 +49,52 @@
     </div>
 
     <script>
-      function sendSuccess() {
-        let xhr = new XMLHttpRequest();
-        xhr.open("GET", "/success", true);
-        xhr.responseType = "json";
-        xhr.onload = () => {
-          console.log("sendSuccess", xhr.response);
-        };
-        xhr.send();
+      function clickMe() {
+        let start = Date.now();
+        while (Date.now() - start < 1000) {}
       }
-      function sendError() {
-        let xhr = new XMLHttpRequest();
-        xhr.open("GET", "/error", true);
-        xhr.responseType = "json";
-        xhr.onload = () => {
-          console.log("load sendError", xhr.response);
-        };
-        xhr.onerror = (error) => {
-          console.log("onerror sendError", error);
-        };
-        xhr.send("name=trainxm");
-      }
+
+      setTimeout(() => {
+        let content = document.getElementsByClassName("content")[0];
+        let h1 = document.createElement("h1");
+
+        h1.innerHTML = "我是这个页面中最有意义的内容";
+        h1.setAttribute("elementtiming", "meaningful");
+        content.appendChild(h1);
+      }, 2000);
+
+      // -----------------------------------------------
+      // DOM解析完成，即使依赖的资源没有加载完成，也会触发这个事件
+      // document.addEventListener("DOMContentLoaded", function () {
+      //   console.log("DOMContentLoaded");
+      //   let start = Date.now();
+      //   while (Date.now() - start < 1000) {
+      //     // console.log("DOMContentLoaded");
+      //   }
+      // });
+
+      // -----------------------------------------------
+      // function sendSuccess() {
+      //   let xhr = new XMLHttpRequest();
+      //   xhr.open("GET", "/success", true);
+      //   xhr.responseType = "json";
+      //   xhr.onload = () => {
+      //     console.log("sendSuccess", xhr.response);
+      //   };
+      //   xhr.send();
+      // }
+      // function sendError() {
+      //   let xhr = new XMLHttpRequest();
+      //   xhr.open("GET", "/error", true);
+      //   xhr.responseType = "json";
+      //   xhr.onload = () => {
+      //     console.log("load sendError", xhr.response);
+      //   };
+      //   xhr.onerror = (error) => {
+      //     console.log("onerror sendError", error);
+      //   };
+      //   xhr.send("name=trainxm");
+      // }
 
       // -----------------------------------------------
       // function throwError() {
